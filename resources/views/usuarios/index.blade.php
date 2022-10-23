@@ -34,7 +34,7 @@
     </div>
 </x-app-layout>
 @include('usuarios.crear_modal')
-
+@include('usuarios.editar_modal')
 <script>
     let usuarios = <?php echo $users; ?>;
     let table;
@@ -82,7 +82,7 @@
                     "data": "tiempo_registro"
                 },
                 {
-                    "defaultContent": "<button class='btn btn-success' onclick='actualizar(this)'><i class='fa-sharp fa-solid fa-pen-to-square'></i></button>&nbsp&nbsp<button onclick='drop(this)' class='btn btn-primary drop-btn ml-2 '><i class='fa-solid fa-trash'></i></button>"
+                    "defaultContent": "<button class='btn btn-success' onclick='btn_editar(this)'><i class='fa-sharp fa-solid fa-pen-to-square'></i></button>&nbsp&nbsp<button onclick='drop(this)' class='btn btn-primary drop-btn ml-2 '><i class='fa-solid fa-trash'></i></button>"
                 },
 
             ],
@@ -155,18 +155,10 @@
 
     }
 
-    function btn_editar() {
-        let id = document.getElementById("id").value;
-        let title = document.getElementById("title").value;
-        let completed = document.getElementById("completed").value;
-
-        node.cells[2].innerHTML = title;
-        node.cells[3].innerHTML = completed;
-        tareas[rowselected['0']['0']].title = title;
-        tareas[rowselected['0']['0']].completed = completed;
-        localStorage.setItem('users', JSON.stringify(tareas));
-        // let node = document.getElementById("users").rows[id];
-        //nodedit.parentNode.parentNode.cells[2].innerHTML=title;
-        //nodedit.parentNode.parentNode.cells[3].innerHTML=completed;
+    function btn_editar(s) {
+        $('#editar_modal').modal({
+            backdrop: 'static',
+            keyboard: false
+        }, 'show'); // abrir
     }
 </script>

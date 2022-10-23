@@ -1,8 +1,8 @@
-<div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="editar_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"><i class="fa-solid fa-user-plus"></i> Nuevo usuario</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle"><i class="fa-solid fa-user-plus"></i> Editar usuario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -45,7 +45,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" id="btn-agregar" class="btn btn-primary" >Agregar</button>
+                <button type="button" id="btn-agregar" class="btn btn-primary" >Editar</button>
             </div>
         </div>
     </div>

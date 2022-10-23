@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
 
 
 
-Route::get('/usuarios',[ UserController::class,'index'])->middleware('auth');
+Route::get('/usuarios',[ UserController::class,'index'])->middleware('auth')->name('usuarios');
 Route::post('/usuarios/destroy',[ UserController::class,'destroy'])->middleware('auth');
 Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('auth');
 

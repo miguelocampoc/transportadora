@@ -129,10 +129,20 @@
 
                 }
             }).then(res => res.json())
-            .catch(error => {
-                console.log(error.response);
+            .catch(err => {
+                console.log(err);
             })
-            .then(response => console.log(response.nombre[0]));
+            .then(response =>{
+               if(response!=200){
+                console.log(response )
+               }
+               else{
+                console.log("ok" )
+
+               }
+
+            } 
+            );
 
 
     });

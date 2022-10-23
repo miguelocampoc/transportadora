@@ -38,17 +38,17 @@ class UserController extends Controller
     public function store(Request $request)
     {
        
-        /*
+        
         $validator = Validator::make($request->all(), [
             'nombre' => 'required',
             'apellido' => 'required',
         ]);
  
          if($validator->fails()){
-            return $validator->errors();
+            return response($validator->errors(),400) ;
 
          }
-        */
+    
         User::create([
             'nombre'=>$request->nombre,
             'apellidos'=>$request->apellido,       
@@ -56,7 +56,8 @@ class UserController extends Controller
             'tipo_usuario'=>$request->tipo_usuario,
             'password'=>$request->password,
         ]);
-        
+        return response(200);
+
     }
 
     /**

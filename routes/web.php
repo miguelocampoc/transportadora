@@ -21,13 +21,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-/*
-Route::get('/usuarios', function () {
-    return view('usuarios/index');
-})->middleware(['auth'])->name('usuarios');
-*/
+
+
+
 
 Route::get('/usuarios',[ UserController::class,'index'])->middleware('auth');
 Route::post('/usuarios/destroy',[ UserController::class,'destroy'])->middleware('auth');
+Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('auth');
 
 require __DIR__.'/auth.php';

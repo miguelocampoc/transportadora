@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConductorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -28,5 +29,7 @@ Route::get('/dashboard', function () {
 Route::get('/usuarios',[ UserController::class,'index'])->middleware('auth')->name('usuarios');
 Route::post('/usuarios/destroy',[ UserController::class,'destroy'])->middleware('auth');
 Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('auth');
+Route::resource('/conductores',ConductorController::class)->middleware('auth');
+
 
 require __DIR__.'/auth.php';

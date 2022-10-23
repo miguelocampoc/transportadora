@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -36,6 +37,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+       
+        /*
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required',
+            'apellido' => 'required',
+        ]);
+ 
+         if($validator->fails()){
+            return $validator->errors();
+
+         }
+        */
         User::create([
             'nombre'=>$request->nombre,
             'apellidos'=>$request->apellido,       
@@ -43,6 +56,7 @@ class UserController extends Controller
             'tipo_usuario'=>$request->tipo_usuario,
             'password'=>$request->password,
         ]);
+        
     }
 
     /**

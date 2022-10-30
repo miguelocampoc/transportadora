@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conductor;
 use Illuminate\Http\Request;
 
 class ConductorController extends Controller
@@ -13,7 +14,9 @@ class ConductorController extends Controller
      */
     public function index()
     {
-        return view('conductores.index');
+        return view('conductores/index',[
+            'conductores'=> Conductor::all()
+        ]);
     }
 
     /**
@@ -23,7 +26,7 @@ class ConductorController extends Controller
      */
     public function create()
     {
-        //
+        echo "vista de crear";
     }
 
     /**
@@ -34,8 +37,14 @@ class ConductorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        Conductor::create([
+            'nombre'=>$request->nombre,
+            'apellidos'=>$request->apellido,       
+            'cedula'=>$request->cedula,
+            'email'=>$request->email,
+            'id_placa'=>$request->placa,
+            'licencia'=>$request->licencia,
+        ]);    }
 
     /**
      * Display the specified resource.

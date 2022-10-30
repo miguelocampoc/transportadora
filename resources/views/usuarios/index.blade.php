@@ -1,18 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Usuarios
+        <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
+            Panel de control de usuarios
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
                 <div class="p-6 bg-white border-b border-gray-200">
                     <button type="button" id="crear_usuario" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i></button><br><br>
-
                     <table class="table table-striped table-bordered" id="users">
                         <thead>
                             <tr>
@@ -23,7 +19,6 @@
                                 <th>Email</th>
                                 <th>Fecha de registro</th>
                                 <th>Tiempo de registro</th>
-
                                 <th>opciones</th>
                             </tr>
                         </thead>

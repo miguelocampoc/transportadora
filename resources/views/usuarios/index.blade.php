@@ -124,8 +124,20 @@
 
                 }
             }).then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
+            .catch(err => {
+                console.log(err);
+            })
+            .then(response =>{
+               if(response!=200){
+                console.log(response )
+               }
+               else{
+                console.log("ok" )
+
+               }
+
+            } 
+            );
 
 
     });

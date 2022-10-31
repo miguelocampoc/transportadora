@@ -11,6 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 class Conductor extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+   
+    protected $table = 'conductores';  
 
     /**
      * The attributes that are mass assignable.
@@ -19,32 +21,18 @@ class Conductor extends Authenticatable
      */
 
     public $fillable = [
+        'id',
         'nombre',
         'apellido',
         'cedula',
         'email',
-        'id_vehiculo',
+        'placa',
         'licencia',
+        'fecha_registro',
+        'tiempo_registro',
         'created_at',
         'updated_at'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+   
 }

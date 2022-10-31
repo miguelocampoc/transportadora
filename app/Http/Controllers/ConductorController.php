@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Conductor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ConductorController extends Controller
 {
@@ -14,8 +15,8 @@ class ConductorController extends Controller
      */
     public function index()
     {
-        return view('conductores/index',[
-            'conductores'=> Conductor::all()
+        return view('conductores/index', [
+            'conductores' => Conductor::all()
         ]);
     }
 
@@ -37,14 +38,29 @@ class ConductorController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'cedula' => 'required',
+            'email' => 'required',
+            'id_vehiculo' => 'required',
+            'licencia' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response($validator->errors(), 400);
+        }
+
         Conductor::create([
-            'nombre'=>$request->nombre,
-            'apellidos'=>$request->apellido,       
-            'cedula'=>$request->cedula,
-            'email'=>$request->email,
-            'id_vehiculo'=>$request->placa,
-            'licencia'=>$request->licencia,
-        ]);    }
+            'nombre' => $request->nombre,
+            'apellidos' => $request->apellido,
+            'cedula' => $request->cedula,
+            'email' => $request->email,
+            'id_vehiculo' => $request->placa,
+            'licencia' => $request->licencia,
+        ]);
+    }
 
     /**
      * Display the specified resource.

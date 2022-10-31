@@ -23,7 +23,7 @@ class Conductor extends Authenticatable
         'apellido',
         'cedula',
         'email',
-        'id_placa',
+        'id_vehiculo',
         'licencia',
         'created_at',
         'updated_at'

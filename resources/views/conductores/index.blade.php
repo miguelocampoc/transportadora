@@ -27,3 +27,5 @@
         </div>
     </div>
 </x-app-layout>
+@include('conductores.crear_modal')
+@include('conductores.editar_modal')

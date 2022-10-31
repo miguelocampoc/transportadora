@@ -13,12 +13,11 @@
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Cedula</th>
-                                <th>Email</th>
-                                <th>Placa del vehiculo</th>
-                                <th>Licencia</th>
+                                <th>Tipo de vehiculo</th>
+                                <th>Conductor</th>
+                                <th>Peso</th>
+                                <th>Placa</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                     </table>
@@ -27,3 +26,5 @@
         </div>
     </div>
 </x-app-layout>
+@include('vehiculos.crear_modal')
+@include('vehiculos.editar_modal')

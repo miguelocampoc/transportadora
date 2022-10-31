@@ -42,7 +42,7 @@ class ConductorController extends Controller
             'apellidos'=>$request->apellido,       
             'cedula'=>$request->cedula,
             'email'=>$request->email,
-            'id_placa'=>$request->placa,
+            'id_vehiculo'=>$request->placa,
             'licencia'=>$request->licencia,
         ]);    }
 

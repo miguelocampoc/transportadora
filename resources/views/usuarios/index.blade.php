@@ -29,7 +29,7 @@
     </div>
 </x-app-layout>
 @include('usuarios.crear_modal')
-@include('usuarios.editar_modal')
+@include('usuarios.editar_modal') 
 <script>
     let usuarios = <?php echo $users; ?>;
     let table;

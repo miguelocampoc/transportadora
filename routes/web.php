@@ -29,6 +29,9 @@ Route::get('/dashboard', function () {
 Route::get('/usuarios',[ UserController::class,'index'])->middleware('auth')->name('usuarios');
 Route::post('/usuarios/destroy',[ UserController::class,'destroy'])->middleware('auth');
 Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('auth');
+Route::post('/usuarios/update',[ UserController::class,'update'])->middleware('auth');
+Route::get('/usuarios/getUsers',[ UserController::class,'getUsers']);
+
 Route::resource('/conductores',ConductorController::class)->middleware('auth');
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -12,6 +13,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getUsers(){
+        return response(User::all()) ;
+    }
+
     public function index()
     {
         return view('usuarios/index',[
@@ -44,7 +49,7 @@ class UserController extends Controller
             'apellido' => 'required',
             'email' => 'required',
             'tipo_usuario' => 'required',
-            'password' => 'required',
+            'password' => 'required|confirmed',
         ]);
  
          if($validator->fails()){
@@ -54,10 +59,12 @@ class UserController extends Controller
     
         User::create([
             'nombre'=>$request->nombre,
-            'apellidos'=>$request->apellido,       
+            'apellido'=>$request->apellido,       
             'email'=>$request->email,
             'tipo_usuario'=>$request->tipo_usuario,
-            'password'=>$request->password,
+            'password'=>Hash::make($request->password),
+            'fecha_registro'=>date("d-m-y"),
+            'tiempo_registro'=>date("H:i:s")
         ]);
         return response(200);
 
@@ -92,8 +99,29 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'email' => 'required',
+            'tipo_usuario' => 'required',
+        ]);
+ 
+         if($validator->fails()){
+            return response($validator->errors(),400) ;
+
+         }
+
+        $user= User::find($request->id_user);
+        $user->nombre= $request->nombre;
+        $user->apellido= $request->apellido;
+        $user->tipo_usuario= $request->tipo_usuario;
+        $user->email= $request->email;
+        $user->save();
+        return response(200) ;
+
     }
 
     /**
@@ -104,9 +132,8 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        /*
         $user=User::findOrfail($request->id);
         $user->delete();   
-        */
+        
      }
 }

@@ -9,7 +9,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <button type="button" id="crear_usuario" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i></button><br><br>
-                    <table class="table table-striped table-bordered" id="users">
+                    <table class="table table-striped table-bordered" id="users" width="100%">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -29,7 +29,7 @@
     </div>
 </x-app-layout>
 @include('usuarios.crear_modal')
-@include('usuarios.editar_modal') 
+@include('usuarios.editar_modal')
 <script>
     let usuarios = <?php echo $users; ?>;
     let table;
@@ -41,7 +41,7 @@
         table = $('#users').DataTable({
             "language": {
                 "lengthMenu": "Mostrar _MENU_ registros por pagina",
-                "zeroRecords": "No hay registros",
+                "zeroRecords": "Cargando..",
                 "info": "Mostrando pagina _PAGE_ de _PAGES_",
                 "infoEmpty": "No registros disponibles",
                 "infoFiltered": "(filtrado de _MAX_ total de registros)",
@@ -53,9 +53,14 @@
                     "previous": "Anterior"
                 },
             },
-            data: usuarios,
+          ajax: {
+            "url": "/usuarios/getUsers",
+            "type": "GET",
+            "dataSrc": "",
+           },
             columns: [{
-                    "data": "id"
+                    "data": "id",
+                    "className": "hidden"
                 },
                 {
                     "data": "nombre"
@@ -118,8 +123,8 @@
 
         fetch('/usuarios/crear', {
                 method: 'POST', // or 'PUT'
-                body: formData, 
-                headers:{
+                body: formData,
+                headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}",
 
                 }
@@ -127,16 +132,46 @@
             .catch(err => {
                 console.log(err);
             })
-            .then(response =>{
-               if(response!=200){
-                console.log(response )
-               }
-               else{
-                console.log("ok" )
+            .then(response => {
+                    console.log(response);
+                    if (response != 200) {
 
-               }
+                        if (typeof response.nombre === 'undefined') {
+                            $("#error_nombre").text("");
+                        }
+                        $("#error_nombre").text(response.nombre);
+                        if (typeof response.apellido === 'undefined') {
+                            $("#error_apellido").text("");
+                        }
+                        $("#error_apellido").text(response.apellido);
+                        if (typeof response.email === 'undefined') {
+                            $("#error_email").text("");
+                        }
+                        $("#error_email").text(response.email);
+                        if (typeof response.password === 'undefined') {
+                            $("#error_password").text("");
+                        }
+                        $("#error_password").text(response.password);
 
-            } 
+
+                    } else {
+                        console.log("ok")
+                        $("#error_nombre").text("");
+                        $("#error_apellido").text("");
+                        $("#error_email").text("");
+                        $("#error_password").text("");
+
+                        document.querySelector("#form_usuarios_crear").reset();
+                        table.ajax.reload();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'El registro ha sido removido exitosamente. ',
+                        });
+                    }
+
+
+                }
+
             );
 
 
@@ -150,19 +185,68 @@
     });
 
     function actualizar(s) {
-        rowselected = table.row($(s).parents('tr'));
-        let id = s.parentNode.parentNode.cells[1].innerHTML;
-        let title = s.parentNode.parentNode.cells[2].innerHTML;
-        let completed = s.parentNode.parentNode.cells[3].innerHTML;
-        node = s.parentNode.parentNode;
-        console.log(s.parentNode.parentNode);
-        document.getElementById("id").value = id;
-        document.getElementById("title").value = title;
-        document.getElementById("completed").value = completed;
+        let form = document.querySelector('#form_usuarios_editar');
+        var formData = new FormData(form);
+        fetch('/usuarios/update', {
+                method: 'POST', // or 'PUT'
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}",
+
+                }
+            }).then(res => res.json())
+            .catch(err => {
+                console.log(err);
+            })
+            .then(response => {
+                    console.log(response);
+                    if (response != 200) {
+                        if (typeof response.nombre === "undefined") {
+                            $("#error_nombre_e").text("");
+                        }
+                        $("#error_nombre_e").text(response.nombre);
+                        if (typeof response.apellido === "undefined") {
+                            $("#error_apellido_e").text("");
+                        }
+                        $("#error_apellido_e").text(response.apellido);
+                        if (typeof response.email === "undefined") {
+                            $("#error_email_e").text("");
+                        }
+                        $("#error_email_e").text(response.email);
+
+                    } else {
+                        $("#error_nombre_e").text("");
+                        $("#error_apellido_e").text("");
+                        $("#error_email_e").text("");
+
+                        console.log("ok")
+                        table.ajax.reload();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'El registro ha sido editado exitosamente. ',
+                        });
+                    }
+
+                }
+
+            );
 
     }
 
     function btn_editar(s) {
+        document.querySelector("form.form_usuarios_editar input[name='id_user']").value = s.parentNode.parentNode.cells[0].innerHTML
+        document.querySelector("form.form_usuarios_editar input[name='nombre']").value = s.parentNode.parentNode.cells[1].innerHTML
+        document.querySelector("form.form_usuarios_editar input[name='apellido']").value = s.parentNode.parentNode.cells[2].innerHTML
+        document.querySelector("form.form_usuarios_editar input[name='email']").value = s.parentNode.parentNode.cells[4].innerHTML
+        let tipo_usuario = s.parentNode.parentNode.cells[3].innerHTML;
+        if (tipo_usuario == "Administrador") {
+            document.querySelector("form.form_usuarios_editar select[name='tipo_usuario']").selectedIndex = "1";
+        }
+        if (tipo_usuario == "Consultor") {
+            document.querySelector("form.form_usuarios_editar select[name='tipo_usuario']").selectedIndex = "0";
+        }
+        
+
         $('#editar_modal').modal({
             backdrop: 'static',
             keyboard: false

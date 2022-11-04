@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\ConductorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\ConductorController;
+use App\Http\Controllers\VehiculoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,15 +24,23 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-
-
 Route::get('/usuarios',[ UserController::class,'index'])->middleware('auth')->name('usuarios');
 Route::post('/usuarios/destroy',[ UserController::class,'destroy'])->middleware('auth');
 Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('auth');
 Route::post('/usuarios/update',[ UserController::class,'update'])->middleware('auth');
 Route::get('/usuarios/getUsers',[ UserController::class,'getUsers']);
 
-Route::resource('/conductores',ConductorController::class)->middleware('auth');
+Route::get('/conductores',[ConductorController::class,'index'])->middleware('auth')->name('conductores');
+Route::post('/conductores/destroy',[ConductorController::class,'destroy'])->middleware('auth');
+Route::post('/conductores/crear',[ConductorController::class,'store'])->middleware('auth');
+Route::post('/conductores/update',[ConductorController::class,'update'])->middleware('auth');
+Route::get('/conductores/getConductor',[ConductorController::class,'getConductor']);
+
+Route::get('/vehiculos',[VehiculoController::class,'index'])->middleware('auth')->name('vehiculos');
+Route::post('/vehiculos/destroy',[VehiculoController::class,'destroy'])->middleware('auth');
+Route::post('/vehiculos/crear',[VehiculoController::class,'store'])->middleware('auth');
+Route::post('/vehiculos/update',[VehiculoController::class,'update'])->middleware('auth');
+Route::get('/vehiculos/getVehiculo',[VehiculoController::class,'getVehiculo']);
 
 
 require __DIR__.'/auth.php';

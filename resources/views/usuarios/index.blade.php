@@ -53,11 +53,11 @@
                     "previous": "Anterior"
                 },
             },
-          ajax: {
-            "url": "/usuarios/getUsers",
-            "type": "GET",
-            "dataSrc": "",
-           },
+            ajax: {
+                "url": "/usuarios/getUsers",
+                "type": "GET",
+                "dataSrc": "",
+            },
             columns: [{
                     "data": "id",
                     "className": "hidden"
@@ -84,9 +84,7 @@
                 {
                     "defaultContent": "<button class='btn btn-success' onclick='btn_editar(this)'><i class='fa-sharp fa-solid fa-pen-to-square'></i></button>&nbsp&nbsp<button onclick='drop(this)' class='btn btn-primary drop-btn ml-2 '><i class='fa-solid fa-trash'></i></button>"
                 },
-
             ],
-
         });
     }
 
@@ -126,7 +124,6 @@
                 body: formData,
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}",
-
                 }
             }).then(res => res.json())
             .catch(err => {
@@ -135,7 +132,6 @@
             .then(response => {
                     console.log(response);
                     if (response != 200) {
-
                         if (typeof response.nombre === 'undefined') {
                             $("#error_nombre").text("");
                         }
@@ -152,8 +148,6 @@
                             $("#error_password").text("");
                         }
                         $("#error_password").text(response.password);
-
-
                     } else {
                         console.log("ok")
                         $("#error_nombre").text("");
@@ -168,13 +162,8 @@
                             title: 'El registro ha sido removido exitosamente. ',
                         });
                     }
-
-
                 }
-
             );
-
-
     });
     $('#crear_usuario').on('click', function() {
         $('#crear').modal({
@@ -192,7 +181,6 @@
                 body: formData,
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}",
-
                 }
             }).then(res => res.json())
             .catch(err => {
@@ -226,11 +214,8 @@
                             title: 'El registro ha sido editado exitosamente. ',
                         });
                     }
-
                 }
-
             );
-
     }
 
     function btn_editar(s) {
@@ -245,7 +230,6 @@
         if (tipo_usuario == "Consultor") {
             document.querySelector("form.form_usuarios_editar select[name='tipo_usuario']").selectedIndex = "0";
         }
-        
 
         $('#editar_modal').modal({
             backdrop: 'static',

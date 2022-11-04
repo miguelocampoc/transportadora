@@ -21,18 +21,15 @@ class Conductor extends Authenticatable
      */
 
     public $fillable = [
-        'id',
         'nombre',
         'apellido',
         'cedula',
-        'email',
         'placa',
         'licencia',
         'fecha_registro',
         'tiempo_registro',
+        'email',
         'created_at',
         'updated_at'
     ];
-
-   
 }

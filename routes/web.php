@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConductorController;
+use App\Http\Controllers\LeyController;
 use App\Http\Controllers\VehiculoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,12 +25,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-
-Route::get('/usuarios',[ UserController::class,'index'])->middleware('auth')->name('usuarios');
-Route::post('/usuarios/destroy',[ UserController::class,'destroy'])->middleware('auth');
-Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('auth');
-Route::post('/usuarios/update',[ UserController::class,'update'])->middleware('auth');
-Route::get('/usuarios/getUsers',[ UserController::class,'getUsers']);
+Route::get('/usuarios',[UserController::class,'index'])->middleware('auth')->name('usuarios');
+Route::post('/usuarios/destroy',[UserController::class,'destroy'])->middleware('auth');
+Route::post('/usuarios/crear',[UserController::class,'store'])->middleware('auth');
+Route::post('/usuarios/update',[UserController::class,'update'])->middleware('auth');
+Route::get('/usuarios/getUsers',[UserController::class,'getUsers']);
 
 Route::get('/conductores',[ConductorController::class,'index'])->middleware('auth')->name('conductores');
 Route::post('/conductores/destroy',[ConductorController::class,'destroy'])->middleware('auth');
@@ -41,6 +42,11 @@ Route::post('/vehiculos/destroy',[VehiculoController::class,'destroy'])->middlew
 Route::post('/vehiculos/crear',[VehiculoController::class,'store'])->middleware('auth');
 Route::post('/vehiculos/update',[VehiculoController::class,'update'])->middleware('auth');
 Route::get('/vehiculos/getVehiculo',[VehiculoController::class,'getVehiculo']);
+
+Route::get('/ley',[LeyController::class,'index'])->middleware('auth')->name('ley');
+Route::post('/ley/destroy',[LeyController::class,'destroy'])->middleware('auth');
+Route::post('/ley/crear',[LeyController::class,'store'])->middleware('auth');
+Route::get('/ley/getLey',[LeyController::class,'getLey']);
 
 
 require __DIR__.'/auth.php';

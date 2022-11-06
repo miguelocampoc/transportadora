@@ -60,8 +60,4 @@
 <script>
     let conductor = <?php echo $conductores; ?>;
     let tipo = <?php echo $tipos; ?>;
-
-
-
-
 </script>

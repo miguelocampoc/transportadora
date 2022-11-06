@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('vehiculos')" :active="request()->routeIs('dashboard')">
                         Vehiculos
                     </x-nav-link>
+                    <x-nav-link :href="route('ley')" :active="request()->routeIs('dashboard')">
+                        Ley 
+                    </x-nav-link>
                 </div>
             </div>
 

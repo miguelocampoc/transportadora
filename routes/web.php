@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\MapaController;
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MapaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\LeyController;
@@ -44,11 +43,10 @@ Route::post('/vehiculos/crear',[VehiculoController::class,'store'])->middleware(
 Route::post('/vehiculos/update',[VehiculoController::class,'update'])->middleware('auth');
 Route::get('/vehiculos/getVehiculo',[VehiculoController::class,'getVehiculo']);
 
-Route::get('/usuarios',[ UserController::class,'index'])->middleware('auth')->name('usuarios');
-Route::post('/usuarios/destroy',[ UserController::class,'destroy'])->middleware('auth');
-Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('auth');
-Route::post('/usuarios/update',[ UserController::class,'update'])->middleware('auth');
-Route::get('/usuarios/getUsers',[ UserController::class,'getUsers']);
+Route::get('/ley',[LeyController::class,'index'])->middleware('auth')->name('ley');
+Route::post('/ley/destroy',[LeyController::class,'destroy'])->middleware('auth');
+Route::post('/ley/crear',[LeyController::class,'store'])->middleware('auth');
+Route::get('/ley/getLey',[LeyController::class,'getLey']);
 
 Route::get('/mapa',[MapaController::class,'index'])->middleware('auth')->name('mapa');
 

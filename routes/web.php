@@ -50,6 +50,12 @@ Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('aut
 Route::post('/usuarios/update',[ UserController::class,'update'])->middleware('auth');
 Route::get('/usuarios/getUsers',[ UserController::class,'getUsers']);
 
+Route::get('/ley',[ UserController::class,'index'])->middleware('auth')->name('ley');
+Route::post('/ley/destroy',[ UserController::class,'destroy'])->middleware('auth');
+Route::post('/ley/crear',[ UserController::class,'store'])->middleware('auth');
+Route::get('/ley/getLey',[ UserController::class,'getLey']);
+
+
 Route::get('/mapa',[MapaController::class,'index'])->middleware('auth')->name('mapa');
 
 require __DIR__.'/auth.php';

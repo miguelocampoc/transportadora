@@ -15,12 +15,9 @@
                     <x-nav-link :href="route('usuarios')" :active="request()->routeIs('dashboard')">
                         Usuarios
                     </x-nav-link>
-<<<<<<< HEAD
                     <x-nav-link :href="route('mapa')" :active="request()->routeIs('mapa')">
                         Mapa
                    </x-nav-link>
-                   
-=======
                     <x-nav-link :href="route('conductores')" :active="request()->routeIs('dashboard')">
                         Conductores
                     </x-nav-link>
@@ -30,7 +27,6 @@
                     <x-nav-link :href="route('ley')" :active="request()->routeIs('dashboard')">
                         Ley 
                     </x-nav-link>
->>>>>>> d75e2fc01ebd8ea9fe2a4c28f5caccd4b798d82b
                 </div>
             </div>
 

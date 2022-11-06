@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ConductorController;
+use App\Http\Controllers\MapaController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -32,7 +34,6 @@ Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('aut
 Route::post('/usuarios/update',[ UserController::class,'update'])->middleware('auth');
 Route::get('/usuarios/getUsers',[ UserController::class,'getUsers']);
 
-Route::resource('/conductores',ConductorController::class)->middleware('auth');
-
+Route::get('/mapa',[MapaController::class,'index'])->middleware('auth')->name('mapa');
 
 require __DIR__.'/auth.php';

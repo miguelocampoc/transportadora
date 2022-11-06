@@ -15,9 +15,10 @@
                     <x-nav-link :href="route('usuarios')" :active="request()->routeIs('dashboard')">
                        Usuarios
                     </x-nav-link>
-                    <x-nav-link :href="route('usuarios')" :active="request()->routeIs('dashboard')">
-                        Conductores
+                    <x-nav-link :href="route('mapa')" :active="request()->routeIs('mapa')">
+                        Mapa
                    </x-nav-link>
+                   
                 </div>
             </div>
 

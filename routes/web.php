@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\MapaController;
 
 use Illuminate\Support\Facades\Route;

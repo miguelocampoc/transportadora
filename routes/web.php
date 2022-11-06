@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapaController;
+
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\LeyController;
@@ -48,6 +49,7 @@ Route::get('/ley',[LeyController::class,'index'])->middleware('auth')->name('ley
 Route::post('/ley/destroy',[LeyController::class,'destroy'])->middleware('auth');
 Route::post('/ley/crear',[LeyController::class,'store'])->middleware('auth');
 Route::get('/ley/getLey',[LeyController::class,'getLey']);
+
 
 Route::get('/mapa',[MapaController::class,'index'])->middleware('auth')->name('mapa');
 

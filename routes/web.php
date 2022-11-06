@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapaController;
+
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\LeyController;
@@ -26,10 +27,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::post('/usuarios/destroy',[UserController::class,'destroy'])->middleware('auth');
-Route::post('/usuarios/crear',[UserController::class,'store'])->middleware('auth');
-Route::post('/usuarios/update',[UserController::class,'update'])->middleware('auth');
-Route::get('/usuarios/getUsers',[UserController::class,'getUsers']);
+Route::get('/usuarios',[ UserController::class,'index'])->middleware('auth')->name('usuarios');
+Route::post('/usuarios/destroy',[ UserController::class,'destroy'])->middleware('auth');
+Route::post('/usuarios/crear',[ UserController::class,'store'])->middleware('auth');
+Route::post('/usuarios/update',[ UserController::class,'update'])->middleware('auth');
+Route::get('/usuarios/getUsers',[ UserController::class,'getUsers']);
 
 Route::get('/conductores',[ConductorController::class,'index'])->middleware('auth')->name('conductores');
 Route::post('/conductores/destroy',[ConductorController::class,'destroy'])->middleware('auth');
@@ -47,6 +49,7 @@ Route::get('/ley',[LeyController::class,'index'])->middleware('auth')->name('ley
 Route::post('/ley/destroy',[LeyController::class,'destroy'])->middleware('auth');
 Route::post('/ley/crear',[LeyController::class,'store'])->middleware('auth');
 Route::get('/ley/getLey',[LeyController::class,'getLey']);
+
 
 Route::get('/mapa',[MapaController::class,'index'])->middleware('auth')->name('mapa');
 

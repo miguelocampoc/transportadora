@@ -12,20 +12,20 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('usuarios')" :active="request()->routeIs('usuarios')">
+                    <x-nav-link :href="route('usuarios')" :active="request()->routeIs('dashboard')">
                         Usuarios
                     </x-nav-link>
-                    <x-nav-link :href="route('mapa')" :active="request()->routeIs('mapa')">
+                    <x-nav-link :href="route('mapa')" :active="request()->routeIs('dashboard')">
                         Mapa
                     </x-nav-link>
-                    <x-nav-link :href="route('conductores')" :active="request()->routeIs('conductores')">
+                    <x-nav-link :href="route('conductores')" :active="request()->routeIs('dashboard')">
                         Conductores
                     </x-nav-link>
-                    <x-nav-link :href="route('vehiculos')" :active="request()->routeIs('vehiculos')">
+                    <x-nav-link :href="route('vehiculos')" :active="request()->routeIs('dashboard')">
                         Vehiculos
                     </x-nav-link>
-                    <x-nav-link :href="route('ley')" :active="request()->routeIs('ley')">
-                        Ley
+                    <x-nav-link :href="route('ley')" :active="request()->routeIs('dashboard')">
+                        Ley 
                     </x-nav-link>
                 </div>
             </div>
@@ -74,20 +74,14 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('usuarios')" :active="request()->routeIs('usuarios')">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 Usuarios
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('mapa')" :active="request()->routeIs('map')">
-                Mapa
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('conductores')" :active="request()->routeIs('conductores')">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 Conductores
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('vehiculos')" :active="request()->routeIs('vehiculos')">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 Vehiculos
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ley')" :active="request()->routeIs('ley')">
-                Ley
             </x-responsive-nav-link>
         </div>
 

@@ -30,6 +30,7 @@ Route::post('/usuarios/destroy',[UserController::class,'destroy'])->middleware('
 Route::post('/usuarios/crear',[UserController::class,'store'])->middleware('auth');
 Route::post('/usuarios/update',[UserController::class,'update'])->middleware('auth');
 Route::get('/usuarios/getUsers',[UserController::class,'getUsers']);
+Route::get('/usuarios',[UserController::class,'index'])->middleware('auth')->name('usuarios');;
 
 Route::get('/conductores',[ConductorController::class,'index'])->middleware('auth')->name('conductores');
 Route::post('/conductores/destroy',[ConductorController::class,'destroy'])->middleware('auth');

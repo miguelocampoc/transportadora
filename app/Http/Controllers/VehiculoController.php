@@ -2,28 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vehiculo;
 use App\Models\Conductor;
+use App\Models\tipo_vehiculo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ConductorController extends Controller
+class VehiculoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getConductor()
+    public function getVehiculo()
     {
-        return response(Conductor::all());
+        return response(
+            Vehiculo::join('conductores', 'conductores.id', '=', 'vehiculos.id_conductor')
+                ->join('tipo_vehiculo', 'tipo_vehiculo.id', '=', 'vehiculos.id_tipo')
+                ->get([
+                    'vehiculos.placa as vplaca', 'vehiculos.fecha_registro as vfecha_registro','vehiculos.id as vid',
+                    'vehiculos.tiempo_registro as vtiempo_registro', 'vehiculos.*', 'conductores.*', 'tipo_vehiculo.*'
+                ])
+        );
     }
     public function index()
     {
-        return view('conductores/index', [
-            'conductores' => Conductor::all()
+        return view('vehiculos/index', [
+            'vehiculos' => Vehiculo::all(),
+            'conductores' => Conductor::all(),
+            'tipos' => tipo_vehiculo::all()
         ]);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +42,7 @@ class ConductorController extends Controller
      */
     public function create()
     {
-        echo "vista de crear";
+        //
     }
 
     /**
@@ -43,27 +54,26 @@ class ConductorController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'cedula' => 'required',
-            'email' => 'required',
+            'id_conductor' => 'required',
+            'peso' => 'required',
             'placa' => 'required',
-            'licencia' => 'required',
+            'estado' => 'required',
+            'id_tipo' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response($validator->errors(), 400);
         }
 
-        Conductor::create([
-            'nombre' => $request->nombre,
-            'apellido' => $request->apellido,
+        Vehiculo::create([
+            'id_conductor' => $request->id_conductor,
+            'peso' => $request->peso,
             'cedula' => $request->cedula,
-            'email' => $request->email,
+            'placa' => $request->placa,
+            'estado' => $request->estado,
             'fecha_registro' => date("d-m-y"),
             'tiempo_registro' => date("H:i:s"),
-            'placa' => $request->placa,
-            'licencia' => $request->licencia
+            'id_tipo' => $request->id_tipo,
         ]);
         return response(200);
     }
@@ -100,26 +110,24 @@ class ConductorController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'cedula' => 'required',
-            'email' => 'required',
+            'id_conductor' => 'required',
+            'peso' => 'required',
             'placa' => 'required',
-            'licencia' => 'required',
+            'estado' => 'required',
+            'id_tipo' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response($validator->errors(), 400);
         }
 
-        $conductor = Conductor::find($request->id_conductor);
-        $conductor->nombre = $request->nombre;
-        $conductor->apellido = $request->apellido;
-        $conductor->cedula = $request->cedula;
-        $conductor->email = $request->email;
-        $conductor->placa = $request->placa;
-        $conductor->licencia = $request->licencia;
-        $conductor->save();
+        $vehiculo = Vehiculo::find($request->id_vehiculo);
+        $vehiculo->id_conductor = $request->id_conductor;
+        $vehiculo->peso = $request->peso;
+        $vehiculo->placa = $request->placa;
+        $vehiculo->estado = $request->estado;
+        $vehiculo->id_tipo = $request->id_tipo;
+        $vehiculo->save();
         return response(200);
     }
 
@@ -131,7 +139,7 @@ class ConductorController extends Controller
      */
     public function destroy(Request $request)
     {
-        $conductor = Conductor::findOrfail($request->id);
-        $conductor->delete();
+        $vehiculo = Vehiculo::findOrfail($request->id);
+        $vehiculo->delete();
     }
 }

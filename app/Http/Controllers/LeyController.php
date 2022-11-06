@@ -2,27 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Ley;
+use App\Models\Conductor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class LeyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getUsers()
+    public function getLey()
     {
-        return response(User::all());
+        return response(
+            Ley::join('conductores', 'conductores.id', '=', 'ley.id_conductor')
+                ->get(['conductores.*','ley.*', 'ley.id as LeyId'])
+        );
     }
 
     public function index()
     {
-        return view('usuarios/index', [
-            'users' => User::all()
+        return view('ley/index', [
+            'ley' => Ley::all(),
+            'conductores' => Conductor::all(),
         ]);
     }
 
@@ -33,7 +37,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        echo "vista de crear";
     }
 
     /**
@@ -45,23 +48,37 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'email' => 'required',
-            'tipo_usuario' => 'required',
-            'password' => 'required|confirmed',
+            'id_conductor' => 'required',
+            'fecha_entrada' => 'required',
+            'fecha_salida' => 'required',
+            'cliente' => 'required',
+            'producto' => 'required',
+            'cargue' => 'required',
+            'descargue' => 'required',
+            'ciudad_entrada' => 'required',
+            'ciudad_salida' => 'required',
+            'peso_entrada' => 'required',
+            'peso_salida' => 'required',
+            'observaciones' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response($validator->errors(), 400);
         }
 
-        User::create([
-            'nombre' => $request->nombre,
-            'apellido' => $request->apellido,
-            'email' => $request->email,
-            'tipo_usuario' => $request->tipo_usuario,
-            'password' => Hash::make($request->password),
+        Ley::create([
+            'id_conductor' => $request->id_conductor,
+            'fecha_entrada' => $request->fecha_entrada,
+            'fecha_salida' => $request->fecha_salida,
+            'cliente' => $request->cliente,
+            'producto' => $request->producto,
+            'cargue' => $request->cargue,
+            'descargue' => $request->descargue,
+            'ciudad_entrada' => $request->ciudad_entrada,
+            'ciudad_salida' => $request->ciudad_salida,
+            'peso_entrada' => $request->peso_entrada,
+            'peso_salida' => $request->peso_salida,
+            'observaciones' => $request->observaciones,
             'fecha_registro' => date("d-m-y"),
             'tiempo_registro' => date("H:i:s")
         ]);
@@ -86,6 +103,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        //
     }
 
     /**
@@ -95,26 +113,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'email' => 'required',
-            'tipo_usuario' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return response($validator->errors(), 400);
-        }
-
-        $user = User::find($request->id_user);
-        $user->nombre = $request->nombre;
-        $user->apellido = $request->apellido;
-        $user->tipo_usuario = $request->tipo_usuario;
-        $user->email = $request->email;
-        $user->save();
-        return response(200);
     }
 
     /**
@@ -125,7 +125,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        $user = User::findOrfail($request->id);
-        $user->delete();
+        $ley = Ley::findOrfail($request->id);
+        $ley->delete();
     }
 }

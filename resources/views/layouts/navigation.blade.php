@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('usuarios') }}">
+                    <a href="{{ route('dashboard') }}">
                         <img src="{{asset('img/favicon.png')}}" class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
                 </div>
@@ -13,12 +13,24 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('usuarios')" :active="request()->routeIs('dashboard')">
-                       Usuarios
+                        Usuarios
                     </x-nav-link>
+<<<<<<< HEAD
                     <x-nav-link :href="route('mapa')" :active="request()->routeIs('mapa')">
                         Mapa
                    </x-nav-link>
                    
+=======
+                    <x-nav-link :href="route('conductores')" :active="request()->routeIs('dashboard')">
+                        Conductores
+                    </x-nav-link>
+                    <x-nav-link :href="route('vehiculos')" :active="request()->routeIs('dashboard')">
+                        Vehiculos
+                    </x-nav-link>
+                    <x-nav-link :href="route('ley')" :active="request()->routeIs('dashboard')">
+                        Ley 
+                    </x-nav-link>
+>>>>>>> d75e2fc01ebd8ea9fe2a4c28f5caccd4b798d82b
                 </div>
             </div>
 
@@ -42,10 +54,9 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Cerrar Sesion') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -70,6 +81,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 Usuarios
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                Conductores
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                Vehiculos
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -84,8 +101,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

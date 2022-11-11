@@ -118,6 +118,11 @@
             }
         });
     }
+
+    function btn_descargar(s){
+        let data = table.row($(s).parents('tr')).data();
+       location.href=`/pdf/${data.id}`;
+    }
     $('#btn-agregar').on('click', function() {
         let form = document.querySelector('#form_ley_añadir');
         var formData = new FormData(form);

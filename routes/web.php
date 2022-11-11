@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\LeyController;
 use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,8 @@ use App\Http\Controllers\VehiculoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+   return  redirect('/login');
+})->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -50,6 +51,7 @@ Route::post('/ley/destroy',[LeyController::class,'destroy'])->middleware('auth')
 Route::post('/ley/crear',[LeyController::class,'store'])->middleware('auth');
 Route::get('/ley/getLey',[LeyController::class,'getLey']);
 
+Route::get('/pdf/{id}', [PdfController::class, 'index']);
 
 Route::get('/mapa',[MapaController::class,'index'])->middleware('auth')->name('mapa');
 

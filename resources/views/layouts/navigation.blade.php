@@ -12,20 +12,20 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('usuarios')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('usuarios')" :active="request()->routeIs('usuarios')">
                         Usuarios
                     </x-nav-link>
-                    <x-nav-link :href="route('mapa')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('mapa')" :active="request()->routeIs('mapa')">
                         Mapa
                     </x-nav-link>
-                    <x-nav-link :href="route('conductores')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('conductores')" :active="request()->routeIs('conductores')">
                         Conductores
                     </x-nav-link>
-                    <x-nav-link :href="route('vehiculos')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('vehiculos')" :active="request()->routeIs('vehiculos')">
                         Vehiculos
                     </x-nav-link>
-                    <x-nav-link :href="route('ley')" :active="request()->routeIs('dashboard')">
-                        Ley 
+                    <x-nav-link :href="route('ley')" :active="request()->routeIs('ley')">
+                        Traslados 
                     </x-nav-link>
                 </div>
             </div>
